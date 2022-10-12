@@ -1,20 +1,27 @@
 import React from "react";
 import { Select, AppProvider } from "@shopify/polaris";
 import { useEffect, useState } from "react";
-import Selectexample from "./Selectexample";
+// import Selectexample from "./Selectexample";
+import Amazone from "./Amazone";
 
 function Home() {
   const [user, setuser] = useState([]);
-  const [selected, setSelected] = useState([]);
-  const token = `eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ1c2VyX2lkIjoiNjMzMjlkN2YwNDUxYzA3NGFhMGUxNWE4Iiwicm9sZSI6ImN1c3RvbWVyIiwiZXhwIjoxNjY1NDk2NTIzLCJpc3MiOiJodHRwczpcL1wvYXBwcy5jZWRjb21tZXJjZS5jb20iLCJ0b2tlbl9pZCI6IjYzNDUzZDhiMjVjMmY4MGUyZjc2NmMzMiJ9.Fmb-Ih64Hnwky6EpBijF0B4idNZ_SEgAOx9VOTrDgGxrRS5IhzwyZgsyrNJQIhuCUGg2eVt242SUd_rDOX_gruxgNqrFMBc0c_5wT3DAaI6yBO-yB7Jq6FNIwAijZd74Seojyn7gEFxfVYvWyCRO1ZrXouQEfRl41HgZqoAOey7RI0fZPNWewK1W15oA1edCsq62yeawdFPBv1J3Gjoad5v1lrfR0jvoYRec22aUAK6yqkHfH4fe1KDqBM0I2Gd3p9lEmXK2SYkNowPF_KCELt1odskd-o6wfaw5xGTQ_MxDvvKFYMQXrQr8jeACIMOoW1YJRWY-xQkeYCTN0PvJ0A`;
-  let options = user?.map((item) => {
-    return { value: item.marketplace, label: item.name };
-  });
+  const [attribute, setAttribute] = useState("");
+  const [attribute1, setAttribute1] = useState("");
+  const [parentid,setParentid] = useState([])
+  const [subtask, setSubtask] = useState();
+  const [selectdata,setSelectdata] = useState([])
+  const token = `eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ1c2VyX2lkIjoiNjMzMjlkN2YwNDUxYzA3NGFhMGUxNWE4Iiwicm9sZSI6ImN1c3RvbWVyIiwiZXhwIjoxNjY1NTg1NzcxLCJpc3MiOiJodHRwczpcL1wvYXBwcy5jZWRjb21tZXJjZS5jb20iLCJ0b2tlbl9pZCI6IjYzNDY5YTJiZmE3OGU1MDllZTJiNGJjMiJ9.oHWv1sHWBkDQ9M3F35makQC9qsSvOUYHHWpHnB0f4tWIJH2KkMgqqSQ9bBfwx9y1Cao5zLfbsh02N0SbNW42l-pFrmV2o-RKXsR_tg8ZAkC-k1kkg9OTNJ3ppGPhF-JnmrD6lfvGAZdC8MKIDex7s41JH88VDW9OBFQdDqTvOjja1e1brMQWdKgILOEQqhIInZzHbn9T_1jjYhlrWxSNvQwBYgXHrNFph7baJVvUJLPXRadf4HyCcDfOikzgJ3BWnOiEaBz5G3d-4rnYAW5h9OD4-KqxE9wL0-_Q5Q-sJNPNp0ziolIpZUnXt4s1MeUL4ItHwxLdB6SuepN9q0acXA`;
+  // let options = user?.map((item) => {
+  //   return { value: item.marketplace, label: item.name };
+  // });
+  // console.log("selectdata",selectdata);
+  console.log("subtask",subtask);
   useEffect(() => {
     const fetchData = async () => {
       let payload = {
         target_marketplace: "eyJtYXJrZXRwbGFjZSI6ImFsbCIsInNob3BfaWQiOm51bGx9",
-        selected: [],
+        selected: parentid,
         target: {
           marketplace: "amazon",
           shopId: "530",
@@ -39,29 +46,52 @@ function Home() {
       );
       const data = await response.json();
       console.log(data);
-      setuser(data.data);
+       console.log(data.data);
+       if (user.length ===0) setuser(data.data);
+       else setSelectdata(data.data)
+
       //   setSelected(data.data);
     };
     fetchData();
-  }, []);
-  console.log("user", user);
-  function handleSelectChange() {}
+  }, [parentid]);
+  // console.log("user", user);
+ 
+
   return (
     <>
       <AppProvider>
         <Select
+          placeholder="select..."
           label="Get All Attributes:"
-          options={options}
-          onChange={handleSelectChange}
-          value=""
+          options={user?.map((item) => {
+            return { value: item.name, label: item.name };
+          })}
+          value={attribute}
+          onChange={(e) => {
+            setAttribute(e);
+            const selectindex = user.find((item) => item.name === e);
+            //console.log("select", selectindex.parent_id);
+            setParentid(selectindex.parent_id);
+          }}
         />
-        <Select
-          label="Get All Subtask:"
-          options={options}
-          onChange={handleSelectChange}
-          value=""
-        />
-        <Selectexample />
+        {selectdata.length != 0 && (
+          <Select
+            placeholder="select..."
+            label="Get All Attributes:"
+            options={selectdata?.map((item) => {
+              return { value: item.name, label: item.name };
+            })}
+            value={attribute1}
+            onChange={(e) => {
+              setAttribute1(e);
+              const selectindex = selectdata.find((item) => item.name == e);
+              console.log("select", selectindex,e);
+              setSubtask(selectindex);
+            }}
+          />
+        )}
+        {(subtask && !subtask.hasChildren) && 
+        <><Amazone/></>}
       </AppProvider>
     </>
   );

@@ -71,7 +71,7 @@ function Selectexample() {
           <FormLayout.Group condensed>
             {isshow && (
               <Select
-                label="Unit of measure"
+                label="Amazon Attribute"
                 placeholder="Select"
                 options={["oz", "g", "kg", "lb"]}
                 value={select}
@@ -83,8 +83,8 @@ function Selectexample() {
             )}
             {change && (
               <Select
-                label="Unit of measure"
-                placeholder="Select"
+                label="Shopify Attribute"
+                placeholder="Select..."
                 options={["text", "select"]}
                 value={select1}
                 onChange={(e) => {
@@ -97,7 +97,7 @@ function Selectexample() {
         </FormLayout>
         {select1 === "text" && (
           <TextField
-            label="text type"
+            label="Set Shopify Attribute"
             type="text"
             value={textselect}
             onChange={(e) => {
@@ -108,7 +108,7 @@ function Selectexample() {
         )}
         {select1 === "select" && (
           <Select
-            label="Unit of measure"
+            label="Set Shopify Attribute"
             placeholder="Select"
             options={["oz", "g", "kg", "lb"]}
             value={select2}
