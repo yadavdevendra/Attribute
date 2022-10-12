@@ -1,7 +1,6 @@
 import React from "react";
 import { Select, AppProvider } from "@shopify/polaris";
 import { useEffect, useState } from "react";
-import Amazone from "./Amazone";
 import Selectexample from "./Selectexample";
 
 function Home() {
@@ -49,32 +48,20 @@ function Home() {
   function handleSelectChange() {}
   return (
     <>
-      <AppProvider
-        i18n={{
-          Polaris: {
-            Common: {
-              checkbox: "case à cocher",
-            },
-            ResourceList: {
-              sortingLabel: "Trier par",
-              showing: "{itemsCount} {resource} affichés",
-              defaultItemPlural: "articles",
-              defaultItemSingular: "article",
-              Item: {
-                viewItem: "Afficher les détails de l'{itemName}",
-              },
-            },
-          },
-        }}
-      >
+      <AppProvider>
         <Select
           label="Get All Attributes:"
           options={options}
           onChange={handleSelectChange}
           value=""
         />
-        <Amazone />
-        <Selectexample/>
+        <Select
+          label="Get All Subtask:"
+          options={options}
+          onChange={handleSelectChange}
+          value=""
+        />
+        <Selectexample />
       </AppProvider>
     </>
   );
