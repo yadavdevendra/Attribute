@@ -77,7 +77,7 @@ function Home() {
         {selectdata.length != 0 && (
           <Select
             placeholder="select..."
-            label="Get All Attributes:"
+            label="Get Subtask:"
             options={selectdata?.map((item) => {
               return { value: item.name, label: item.name };
             })}
@@ -86,6 +86,7 @@ function Home() {
               setAttribute1(e);
               const selectindex = selectdata.find((item) => item.name == e);
               console.log("select", selectindex,e);
+              setParentid(selectindex.parent_id);
               setSubtask(selectindex);
             }}
           />
