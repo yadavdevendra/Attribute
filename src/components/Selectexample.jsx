@@ -1,32 +1,17 @@
-import {
-  Stack,
-  FormLayout,
-  TextField,
-  Select,
-  InlineError,
-  Card,
-  TextStyle,
-  Link,
-  Button,
-} from "@shopify/polaris";
-import { useState, useCallback } from "react";
+import {Stack,FormLayout,TextField,Select,Card,Button,} from "@shopify/polaris";
+import { useState} from "react";
 
 function Selectexample() {
-  const [isshow, setIsshow] = useState(false);
   const [select, setSelect] = useState();
+  const [select1, setSelect1] = useState();
+  const [select2, setSelect2] = useState();
+  const [textselect, setTextselect] = useState();
+  const [isshow, setIsshow] = useState(false);
   const [textshow, setTextshow] = useState(false);
   const [change, setchange] = useState(false);
 
   function handlebutton() {
     setIsshow(true);
-  }
-  function handleselect(e) {
-    setSelect(e)
-    setchange(true);
-  }
- 
-  function handletext(value) {
-setSelect(value)
   }
   return (
     <Card sectioned>
@@ -52,23 +37,36 @@ setSelect(value)
               <Select
                 label="Unit of measure"
                 placeholder="Select"
-                options={["oz", "g", "kg", "lb"]}
-                value="oz"
+                options={["text", "select"]}
+                value={select1}
                 onChange={(e) => {
-                  setSelect(e);
+                  setSelect1(e);
                   setTextshow(true);
                 }}
               />
             )}
           </FormLayout.Group>
         </FormLayout>
-        {textshow && (
+        {select1 === "text" && (
           <TextField
             label="text type"
             type="text"
-            value={select}
-            onChange={handletext}
+            value={textselect}
+            onChange={(e) => {
+              setTextselect(e);
+            }}
             autoComplete="off"
+          />
+        )}
+        {select1 === "select" && (
+          <Select
+            label="Unit of measure"
+            placeholder="Select"
+            options={["oz", "g", "kg", "lb"]}
+            value={select2}
+            onChange={(e) => {
+              setSelect2(e);
+            }}
           />
         )}
       </Stack>
