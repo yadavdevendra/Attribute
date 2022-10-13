@@ -18,8 +18,8 @@ function Amazone() {
   // const options = user?.map((item) => {
   //   return { value: item.marketplace, label: item.name };
   // });
-  console.log("select",select);
-    console.log("selectusers", users[select]);
+  console.log("select", select);
+  console.log("selectusers", users[select]);
   useEffect(() => {
     const fetchData = async () => {
       let payload = {
@@ -89,7 +89,8 @@ function Amazone() {
                 value={select}
                 onChange={(e) => {
                   setSelect(e);
-               
+                  setSelect1("");
+                  setSelect2("");
                 }}
               />
             )}
@@ -103,7 +104,7 @@ function Amazone() {
                 value={select1}
                 onChange={(e) => {
                   setSelect1(e);
-              
+                  setSelect2("");
                 }}
               />
             )}
