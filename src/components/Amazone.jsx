@@ -9,31 +9,38 @@ import {
 import { useState, useEffect } from "react";
 
 function Amazone() {
-  const [user, setuser] = useState([]);
-  const [select, setSelect] = useState();
-  const [select1, setSelect1] = useState();
-  const [select2, setSelect2] = useState();
-  const [textselect, setTextselect] = useState();
+  const [users, setUsers] = useState([]);
+  const [select, setSelect] = useState("");
+  const [select1, setSelect1] = useState("");
+  const [select2, setSelect2] = useState("");
   const [isshow, setIsshow] = useState(false);
-  const [textshow, setTextshow] = useState(false);
-  const [change, setchange] = useState(false);
-
-  const token = `eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ1c2VyX2lkIjoiNjMzMjlkN2YwNDUxYzA3NGFhMGUxNWE4Iiwicm9sZSI6ImN1c3RvbWVyIiwiZXhwIjoxNjY1NTcwOTEzLCJpc3MiOiJodHRwczpcL1wvYXBwcy5jZWRjb21tZXJjZS5jb20iLCJ0b2tlbl9pZCI6IjYzNDY2MDIxOTAwYzg0NjZiZjQ1ZDg1NSJ9.HUo6iQc7uK29Vq4sfAdWC8ybUhdwBQbiFDioWw6Vi3rMZNKRCrbVBjTOoVEAw8kvJhnin76Vh9N66Ze05FkSnePOI9aifMXVNhBOXU4Qv5GqFrgmGQJSSW6pePTsQuC-RSsDuyqlICrrvrQQYaeBWXhuee9vMBUgv91w2I3ufQBF3hYv5zGSnI1gcnHXd0pkPm2AA9Pk_bdzdbZ2e0Vl_sNaHSQS7rYe98rzQboylovkbOMg08Uz7IEMHo1GdLIZYYFmRJ1PDE4csA62WbA6IeYtxvvRr8LW-_BnR6Tme1kqjyfIf3aSOY7k1HjjixlID1kWqYvTe1LU9x0jQL0INw`;
-  let options = user?.map((item) => {
-    return { value: item.marketplace, label: item.name };
-  });
+  const token = `eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ1c2VyX2lkIjoiNjMzMjlkN2YwNDUxYzA3NGFhMGUxNWE4Iiwicm9sZSI6ImN1c3RvbWVyIiwiZXhwIjoxNjY1Njc3MTM0LCJpc3MiOiJodHRwczpcL1wvYXBwcy5jZWRjb21tZXJjZS5jb20iLCJ0b2tlbl9pZCI6IjYzNDdmZjBlNWY3MWUxMmE3NjE2M2E3MiJ9.RzQ3x98rGo-1q1dMkJIK2XJlz8LIEtDfazugK8q1e7O-cWQJWD5l0CTKGFIIGI58lGqEVI2a88szbHTKuilYglAqF_Z5QU0BWP8sHpj_Qn3oKVTHozpfH9ogSTfd8o2gmbyFb9Hz8ox-fCeltDsFmCKn48FfZy_Qlxq8OYgxm4FglpIbphDqDc8rfEktNuRBdscSfTQM0ke3o2YElrbyE4fHolFyBUxhd-ioEurSkG7d2NN9JfOEOwjxtcB1OJmUJx8uqW8kRUnNzMh1JpzBOWSjs9fRZLnuSZZMgkvH_BNaoXz3OvKkg_tnum9FC4Qkg5weZYCCpmqA0ArpP1qSWw`;
+  // const options = user?.map((item) => {
+  //   return { value: item.marketplace, label: item.name };
+  // });
+  console.log("select",select);
+    console.log("selectusers", users[select]);
   useEffect(() => {
     const fetchData = async () => {
       let payload = {
-        target_marketplace: "eyJtYXJrZXRwbGFjZSI6ImFsbCIsInNob3BfaWQiOm51bGx9",
-        selected: [],
+        data: {
+          barcode_exemption: false,
+          browser_node_id: "1380072031",
+          category: "major_appliances",
+          sub_category: "microwaveoven",
+        },
+        source: {
+          marketplace: "shopify",
+          shopId: "500",
+        },
         target: {
           marketplace: "amazon",
           shopId: "530",
         },
+        target_marketplace: "eyJtYXJrZXRwbGFjZSI6ImFsbCIsInNob3BfaWQiOm51bGx9",
       };
       const response = await fetch(
-        `https://multi-account.sellernext.com/home/public/connector/profile/getCategoryAttributes/?selected=[]`,
+        `https://multi-account.sellernext.com/home/public/connector/profile/getCategoryAttributes/`,
         {
           method: "POST",
           headers: {
@@ -51,15 +58,18 @@ function Amazone() {
       );
       const data = await response.json();
       console.log("Amazone", data);
-      setuser(data.data);
-    }
+      setUsers(data.data);
+    };
     fetchData();
   }, []);
-  console.log("Amazone user", user);
+  console.log("Amazone user", users);
 
   function handlebutton() {
     setIsshow(true);
   }
+  // const options = user?.map((item) => {
+  //   return { value: item.marketplace, label: item.name };
+  // });
   return (
     <Card sectioned>
       <Button textAlign="left" onClick={handlebutton}>
@@ -72,45 +82,40 @@ function Amazone() {
               <Select
                 label="Amazon Attribute"
                 placeholder="Select"
-                options={["oz", "g", "kg", "lb"]}
+                options={Object.keys(users)?.map((item) => {
+                  return { value: item, label: item };
+                })}
                 // disabled={disablevalue(select) ? true : false}
                 value={select}
                 onChange={(e) => {
                   setSelect(e);
-                  setchange(true);
+               
                 }}
               />
             )}
-            {change && (
+            {select != "" && (
               <Select
                 label="Shopify Attribute"
                 placeholder="Select..."
-                options={["text", "select"]}
+                options={Object.keys(users[select])?.map((item) => {
+                  return { value: item, label: item };
+                })}
                 value={select1}
                 onChange={(e) => {
                   setSelect1(e);
-                  setTextshow(true);
+              
                 }}
               />
             )}
           </FormLayout.Group>
         </FormLayout>
-        {select1 === "text" && (
-          <TextField
-            label="Set Shopify Attribute"
-            type="text"
-            value={textselect}
-            onChange={(e) => {
-              setTextselect(e);
-            }}
-            autoComplete="off"
-          />
-        )}
-        {select1 === "select" && (
+        {select1 != "" && (
           <Select
             label="Set Shopify Attribute"
             placeholder="Select"
-            options={["oz", "g", "kg", "lb"]}
+            options={Object.keys(users[select][select1])?.map((item) => {
+              return { value: item, label: item };
+            })}
             value={select2}
             onChange={(e) => {
               setSelect2(e);

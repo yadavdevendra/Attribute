@@ -15,8 +15,6 @@ function Home() {
   const [attribute5, setAttribute5] = useState("");
   const [attribute6, setAttribute6] = useState("");
   const [attribute7, setAttribute7] = useState("");
-  const [attribute8, setAttribute8] = useState("");
-  const [attribute9, setAttribute9] = useState("");
   const [parentid, setParentid] = useState([]);
   const [subtask, setSubtask] = useState();
   // for selected data then open another grop down
@@ -30,12 +28,12 @@ function Home() {
   const [selectdata7, setSelectdata7] = useState([]);
   const [selectdata8, setSelectdata8] = useState([]);
   const [selectdata9, setSelectdata9] = useState([]);
-  const token = `eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ1c2VyX2lkIjoiNjMzMjlkN2YwNDUxYzA3NGFhMGUxNWE4Iiwicm9sZSI6ImN1c3RvbWVyIiwiZXhwIjoxNjY1NjYyMzU4LCJpc3MiOiJodHRwczpcL1wvYXBwcy5jZWRjb21tZXJjZS5jb20iLCJ0b2tlbl9pZCI6IjYzNDdjNTU2NDQwNzk2NTJkNjU5NzQ3MiJ9.GTMLRvvk_GZd2vZUw6s4GrX-_ZXy92zatsqaEsQDOS70NIML7h7MJ6X4D8djYKbWqz8J1_MdqizRghLspwRACR_deriUYyvISiIAhNfN2OIQ5Z4r80Ji7GBNPMXsdWmmMBiQJ8yi29nktfTBsvdZlNXqisbPXWwU4W9Q4N2optyvYqjx6mAlu8r0UlSRgxQSowy5UlH550yz8XQ1QOM0Oglo1gcvpt7p8jbqXHhkkbDcENMRK2-biQWrxmFHngJShAVI5Bef1lzdsh-_p8OxNnRzNGFLphJ1aeFhMJL34m6CFOIGeR_1aEir-2ATORPnITD2xYm4pbdLQsLwvv-YzQ`;
+  const token = `eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ1c2VyX2lkIjoiNjMzMjlkN2YwNDUxYzA3NGFhMGUxNWE4Iiwicm9sZSI6ImN1c3RvbWVyIiwiZXhwIjoxNjY1Njc3MTM0LCJpc3MiOiJodHRwczpcL1wvYXBwcy5jZWRjb21tZXJjZS5jb20iLCJ0b2tlbl9pZCI6IjYzNDdmZjBlNWY3MWUxMmE3NjE2M2E3MiJ9.RzQ3x98rGo-1q1dMkJIK2XJlz8LIEtDfazugK8q1e7O-cWQJWD5l0CTKGFIIGI58lGqEVI2a88szbHTKuilYglAqF_Z5QU0BWP8sHpj_Qn3oKVTHozpfH9ogSTfd8o2gmbyFb9Hz8ox-fCeltDsFmCKn48FfZy_Qlxq8OYgxm4FglpIbphDqDc8rfEktNuRBdscSfTQM0ke3o2YElrbyE4fHolFyBUxhd-ioEurSkG7d2NN9JfOEOwjxtcB1OJmUJx8uqW8kRUnNzMh1JpzBOWSjs9fRZLnuSZZMgkvH_BNaoXz3OvKkg_tnum9FC4Qkg5weZYCCpmqA0ArpP1qSWw`;
   // let options = user?.map((item) => {
   //   return { value: item.marketplace, label: item.name };
   // });
   // console.log("selectdata",selectdata);
-  console.log("subtask", subtask);
+  // console.log("subtask", subtask);
   useEffect(() => {
     const fetchData = async () => {
       let payload = {
@@ -65,8 +63,8 @@ function Home() {
       );
       const data = await response.json();
       // const data = JSON.parse(JSON.stringify(d))
-      // console.log(data);
-      console.log(data.data);
+      console.log(data);
+      // console.log(data.data);
       if (user.length === 0) setuser(data.data);
       else if (selectdata.length === 0) setSelectdata(data.data);
       else if (selectdata1.length === 0) setSelectdata1(data.data);
@@ -129,7 +127,7 @@ function Home() {
               setSubtask();
               setAttribute1(e);
               const selectindex = selectdata.find((item) => item.name == e);
-              console.log("select", selectindex, e);
+              // console.log("select", selectindex, e);
               setParentid(selectindex.parent_id);
               setSubtask(selectindex);
             }}
@@ -154,7 +152,7 @@ function Home() {
               setSubtask();
               setAttribute2(e);
               const selectindex = selectdata1.find((item) => item.name == e);
-              console.log("select", selectindex, e);
+              // console.log("select", selectindex, e);
               setParentid(selectindex.parent_id);
               setSubtask(selectindex);
             }}
@@ -178,7 +176,7 @@ function Home() {
               setSubtask();
               setAttribute3(e);
               const selectindex = selectdata2.find((item) => item.name == e);
-              console.log("select", selectindex, e);
+              // console.log("select", selectindex, e);
               setParentid(selectindex.parent_id);
               setSubtask(selectindex);
             }}
@@ -201,7 +199,7 @@ function Home() {
               setSubtask();
               setAttribute4(e);
               const selectindex = selectdata3.find((item) => item.name == e);
-              console.log("select", selectindex, e);
+              // console.log("select", selectindex, e);
               setParentid(selectindex.parent_id);
               setSubtask(selectindex);
             }}
@@ -223,7 +221,7 @@ function Home() {
               setSubtask();
               setAttribute5(e);
               const selectindex = selectdata4.find((item) => item.name == e);
-              console.log("select", selectindex, e);
+              // console.log("select", selectindex, e);
               setParentid(selectindex.parent_id);
               setSubtask(selectindex);
             }}
@@ -244,7 +242,7 @@ function Home() {
               setSubtask();
               setAttribute6(e);
               const selectindex = selectdata5.find((item) => item.name == e);
-              console.log("select", selectindex, e);
+              // console.log("select", selectindex, e);
               setParentid(selectindex.parent_id);
               setSubtask(selectindex);
             }}
@@ -264,7 +262,7 @@ function Home() {
               setSubtask();
               setAttribute7(e);
               const selectindex = selectdata6.find((item) => item.name == e);
-              console.log("select", selectindex, e);
+              // console.log("select", selectindex, e);
               setParentid(selectindex.parent_id);
               setSubtask(selectindex);
             }}
