@@ -30,12 +30,12 @@ function Home() {
   const [selectdata7, setSelectdata7] = useState([]);
   const [selectdata8, setSelectdata8] = useState([]);
   const [selectdata9, setSelectdata9] = useState([]);
-  const token = `eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ1c2VyX2lkIjoiNjMzMjlkN2YwNDUxYzA3NGFhMGUxNWE4Iiwicm9sZSI6ImN1c3RvbWVyIiwiZXhwIjoxNjY1NjU0Nzk3LCJpc3MiOiJodHRwczpcL1wvYXBwcy5jZWRjb21tZXJjZS5jb20iLCJ0b2tlbl9pZCI6IjYzNDdhN2NkMGM4MDM5M2I4Zjc3Y2RiMiJ9.TyCrzEOprzhsVN4dIKfbYeI2gzQrONJftmCP5riXRmk-XX9_Vi3Tk2fFXjy8_xwCqPmPHf2UpLSb4itqznFD8paqC-CFx9gSx2-U7R7p95x2UkULwUclGfVrc0gSdYvZ2Xn-EH74V9eEMebbtVbjd_CnK2xbgIAmeR9oJ1iTH5E3w9CGaOh46Dq00R7caNgz4gWjGOcfEQCHwihSwHxlstKgBygveCFZcaiBXldVjT4OH2mGrU0g_4uTURz78x0JT5pvBO5yfVhp4WIp229aXbNHouzsQiJ47L6tzA702r-_sHRrI8HQFV_M0we_FsCim8PNwDGjG_9QBuCs1qkJxw`;
+  const token = `eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ1c2VyX2lkIjoiNjMzMjlkN2YwNDUxYzA3NGFhMGUxNWE4Iiwicm9sZSI6ImN1c3RvbWVyIiwiZXhwIjoxNjY1NjYyMzU4LCJpc3MiOiJodHRwczpcL1wvYXBwcy5jZWRjb21tZXJjZS5jb20iLCJ0b2tlbl9pZCI6IjYzNDdjNTU2NDQwNzk2NTJkNjU5NzQ3MiJ9.GTMLRvvk_GZd2vZUw6s4GrX-_ZXy92zatsqaEsQDOS70NIML7h7MJ6X4D8djYKbWqz8J1_MdqizRghLspwRACR_deriUYyvISiIAhNfN2OIQ5Z4r80Ji7GBNPMXsdWmmMBiQJ8yi29nktfTBsvdZlNXqisbPXWwU4W9Q4N2optyvYqjx6mAlu8r0UlSRgxQSowy5UlH550yz8XQ1QOM0Oglo1gcvpt7p8jbqXHhkkbDcENMRK2-biQWrxmFHngJShAVI5Bef1lzdsh-_p8OxNnRzNGFLphJ1aeFhMJL34m6CFOIGeR_1aEir-2ATORPnITD2xYm4pbdLQsLwvv-YzQ`;
   // let options = user?.map((item) => {
   //   return { value: item.marketplace, label: item.name };
   // });
   // console.log("selectdata",selectdata);
-  // console.log("subtask", subtask);
+  console.log("subtask", subtask);
   useEffect(() => {
     const fetchData = async () => {
       let payload = {
@@ -77,7 +77,7 @@ function Home() {
       else if (selectdata6.length === 0) setSelectdata6(data.data);
       else if (selectdata7.length === 0) setSelectdata7(data.data);
       else if (selectdata8.length === 0) setSelectdata8(data.data);
-      // else setSelectdata9(data.data);
+      else setSelectdata9(data.data);
     };
     fetchData();
   }, [parentid]);
@@ -99,7 +99,7 @@ function Home() {
             setParentid(selectindex.parent_id);
           }}
         />
-        {selectdata.length != 0 && (
+        {(selectdata.length != 0) && (
           <Select
             placeholder="select..."
             label="Get Subtask:"
