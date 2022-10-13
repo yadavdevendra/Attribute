@@ -102,6 +102,7 @@ function Home() {
             setSelectdata6([]);
             setSelectdata7([]);
             setSelectdata8([]);
+            setSubtask();
             setAttribute(e);
             const selectindex = user.find((item) => item.name === e);
             //console.log("select", selectindex.parent_id);
@@ -118,7 +119,6 @@ function Home() {
             value={attribute1}
             onChange={(e) => {
               setSelectdata1([]);
-
               setSelectdata2([]);
               setSelectdata3([]);
               setSelectdata4([]);
@@ -126,6 +126,7 @@ function Home() {
               setSelectdata6([]);
               setSelectdata7([]);
               setSelectdata8([]);
+              setSubtask();
               setAttribute1(e);
               const selectindex = selectdata.find((item) => item.name == e);
               console.log("select", selectindex, e);
@@ -144,13 +145,13 @@ function Home() {
             value={attribute2}
             onChange={(e) => {
               setSelectdata2([]);
-
               setSelectdata3([]);
               setSelectdata4([]);
               setSelectdata5([]);
               setSelectdata6([]);
               setSelectdata7([]);
               setSelectdata8([]);
+              setSubtask();
               setAttribute2(e);
               const selectindex = selectdata1.find((item) => item.name == e);
               console.log("select", selectindex, e);
@@ -174,6 +175,7 @@ function Home() {
               setSelectdata6([]);
               setSelectdata7([]);
               setSelectdata8([]);
+              setSubtask();
               setAttribute3(e);
               const selectindex = selectdata2.find((item) => item.name == e);
               console.log("select", selectindex, e);
@@ -196,6 +198,7 @@ function Home() {
               setSelectdata6([]);
               setSelectdata7([]);
               setSelectdata8([]);
+              setSubtask();
               setAttribute4(e);
               const selectindex = selectdata3.find((item) => item.name == e);
               console.log("select", selectindex, e);
@@ -217,6 +220,7 @@ function Home() {
               setSelectdata6([]);
               setSelectdata7([]);
               setSelectdata8([]);
+              setSubtask();
               setAttribute5(e);
               const selectindex = selectdata4.find((item) => item.name == e);
               console.log("select", selectindex, e);
@@ -237,6 +241,7 @@ function Home() {
               setSelectdata6([]);
               setSelectdata7([]);
               setSelectdata8([]);
+              setSubtask();
               setAttribute6(e);
               const selectindex = selectdata5.find((item) => item.name == e);
               console.log("select", selectindex, e);
@@ -256,6 +261,7 @@ function Home() {
             onChange={(e) => {
               setSelectdata7([]);
               setSelectdata8([]);
+              setSubtask();
               setAttribute7(e);
               const selectindex = selectdata6.find((item) => item.name == e);
               console.log("select", selectindex, e);
