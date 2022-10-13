@@ -6,7 +6,7 @@ import Amazone from "./Amazone";
 
 function Home() {
   const [user, setuser] = useState([]);
-  // value set 
+  // value set
   const [attribute, setAttribute] = useState("");
   const [attribute1, setAttribute1] = useState("");
   const [attribute2, setAttribute2] = useState("");
@@ -93,13 +93,22 @@ function Home() {
           })}
           value={attribute}
           onChange={(e) => {
+            setSelectdata([]);
+            setSelectdata1([]);
+            setSelectdata2([]);
+            setSelectdata3([]);
+            setSelectdata4([]);
+            setSelectdata5([]);
+            setSelectdata6([]);
+            setSelectdata7([]);
+            setSelectdata8([]);
             setAttribute(e);
             const selectindex = user.find((item) => item.name === e);
             //console.log("select", selectindex.parent_id);
             setParentid(selectindex.parent_id);
           }}
         />
-        {(selectdata.length != 0) && (
+        {selectdata.length != 0 && (
           <Select
             placeholder="select..."
             label="Get Subtask:"
@@ -108,6 +117,15 @@ function Home() {
             })}
             value={attribute1}
             onChange={(e) => {
+              setSelectdata1([]);
+
+              setSelectdata2([]);
+              setSelectdata3([]);
+              setSelectdata4([]);
+              setSelectdata5([]);
+              setSelectdata6([]);
+              setSelectdata7([]);
+              setSelectdata8([]);
               setAttribute1(e);
               const selectindex = selectdata.find((item) => item.name == e);
               console.log("select", selectindex, e);
@@ -125,6 +143,14 @@ function Home() {
             })}
             value={attribute2}
             onChange={(e) => {
+              setSelectdata2([]);
+
+              setSelectdata3([]);
+              setSelectdata4([]);
+              setSelectdata5([]);
+              setSelectdata6([]);
+              setSelectdata7([]);
+              setSelectdata8([]);
               setAttribute2(e);
               const selectindex = selectdata1.find((item) => item.name == e);
               console.log("select", selectindex, e);
@@ -142,6 +168,12 @@ function Home() {
             })}
             value={attribute3}
             onChange={(e) => {
+              setSelectdata3([]);
+              setSelectdata4([]);
+              setSelectdata5([]);
+              setSelectdata6([]);
+              setSelectdata7([]);
+              setSelectdata8([]);
               setAttribute3(e);
               const selectindex = selectdata2.find((item) => item.name == e);
               console.log("select", selectindex, e);
@@ -159,6 +191,11 @@ function Home() {
             })}
             value={attribute4}
             onChange={(e) => {
+              setSelectdata4([]);
+              setSelectdata5([]);
+              setSelectdata6([]);
+              setSelectdata7([]);
+              setSelectdata8([]);
               setAttribute4(e);
               const selectindex = selectdata3.find((item) => item.name == e);
               console.log("select", selectindex, e);
@@ -176,6 +213,10 @@ function Home() {
             })}
             value={attribute5}
             onChange={(e) => {
+              setSelectdata5([]);
+              setSelectdata6([]);
+              setSelectdata7([]);
+              setSelectdata8([]);
               setAttribute5(e);
               const selectindex = selectdata4.find((item) => item.name == e);
               console.log("select", selectindex, e);
@@ -193,6 +234,9 @@ function Home() {
             })}
             value={attribute6}
             onChange={(e) => {
+              setSelectdata6([]);
+              setSelectdata7([]);
+              setSelectdata8([]);
               setAttribute6(e);
               const selectindex = selectdata5.find((item) => item.name == e);
               console.log("select", selectindex, e);
@@ -210,6 +254,8 @@ function Home() {
             })}
             value={attribute7}
             onChange={(e) => {
+              setSelectdata7([]);
+              setSelectdata8([]);
               setAttribute7(e);
               const selectindex = selectdata6.find((item) => item.name == e);
               console.log("select", selectindex, e);
