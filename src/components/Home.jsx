@@ -29,23 +29,24 @@ function Home() {
   const [selectdata7, setSelectdata7] = useState([]);
   const [selectdata8, setSelectdata8] = useState([]);
   const [selectdata9, setSelectdata9] = useState([]);
-  const token = `eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ1c2VyX2lkIjoiNjMzMjlkN2YwNDUxYzA3NGFhMGUxNWE4Iiwicm9sZSI6ImN1c3RvbWVyIiwiZXhwIjoxNjY1NzM3ODk5LCJpc3MiOiJodHRwczpcL1wvYXBwcy5jZWRjb21tZXJjZS5jb20iLCJ0b2tlbl9pZCI6IjYzNDhlYzZiMmFkNmEzMjhiNjQzZjViNSJ9.dbnMaYopm5t9TItE5Sw-OtPSZpQp7g4HYXj2SzfG9yeQLgJMpCz3zYnC5D0drvUZcNnHSmF2K4QM24NfKJf9gRtUoFpVFsNMIWixMHaYmiVek21ryz6-CNgRJzrtmb3EmlpJAKIsK9H-zYOgIsMfG9nBwjguYaRLAqmmkOPFh7CRg7YInxcYUdfM4hh1sSSpLcr4s1-BMzACAqL1zGyB-Bo39tTQFJ4d4WuQcoXHkX-W1EL-srH09-EU3WAEFdG4-xR0ZSnAiXqIfrniwM0q770GjuUkFDrV5320STPXRZJmQ4rzOrxxDZbJRcHNP4Jrmx2sut8n20Aqw-9qo6YZqA`;
+  const token = `eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ1c2VyX2lkIjoiNjMzMjlkN2YwNDUxYzA3NGFhMGUxNWE4Iiwicm9sZSI6ImN1c3RvbWVyIiwiZXhwIjoxNjY1NzU0MDA1LCJpc3MiOiJodHRwczpcL1wvYXBwcy5jZWRjb21tZXJjZS5jb20iLCJ0b2tlbl9pZCI6IjYzNDkyYjU1ODM3MzEwMDViYzRiYTU1MyJ9.b5ed7ceQxbEqQ27wd0kyA4oreJYjHhowtVRLTfq1lPOCU2vBr_kJaSYDind8prM2JZ-nzzCLLMQdNB3L3ig1_nhyeKi2adyiZEHQhpbvc0hv7SZwS-2-DP2csInuoxAvXb0B-SsJOERI31eeXLGXx6yCip7huWEDay_aQXzRLDb23PeHPG9ZLn0zPd1_6X9doL-f6UkT9I5ce40IQfTiQ2eJ1vJJTy1i3hgfDbUb9KvgYJmvLz8xDFg39GSIC9r1f90XV-HzoPXzVnnAMa2uT9QP6ucPxusbIUR1DJudkKA3mDUCKB4u5bA-Z39lRx_bgvaGLs1qJLEYLDS4MOjdFw`;
   // let options = user?.map((item) => {
   //   return { value: item.marketplace, label: item.name };
   // });
   // console.log("selectdata",selectdata);
   // console.log("subtask", subtask);
+  // console.log(disable,"disable");
   const [components, setComponents] = useState([]);
   const handleComponent = (data) => {
     setComponents(data);
   };
+   
   const handleClick = () => {
     const id = Math.floor(Math.random() * 9999999999999);
     setComponents([
       ...components,
       {
         id,
-        users: "",
         select: "",
         select1: "",
         select2: "",
@@ -82,7 +83,7 @@ function Home() {
       );
       const data = await response.json();
       // const data = JSON.parse(JSON.stringify(d))
-      console.log(data);
+      // console.log(data);
       // console.log(data.data);
       if (user.length === 0) setuser(data.data);
       else if (selectdata.length === 0) setSelectdata(data.data);
@@ -137,7 +138,7 @@ function Home() {
           }
         );
         const data = await response.json();
-        console.log("Amazone", data);
+        // console.log("Amazone", data);
         setUsers(data.data);
       };
       fetchData();
@@ -345,11 +346,13 @@ function Home() {
             {components.map((item) => {
               return (
                 <Amazone
-                users={users}
+                  users={users}
+                
                   key={item.id}
                   id={item.id}
                   components={components}
                   handleComponent={handleComponent}
+                
                 />
               );
             })}
