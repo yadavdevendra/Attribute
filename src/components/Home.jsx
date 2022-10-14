@@ -1,5 +1,5 @@
 import React from "react";
-import { Select, AppProvider } from "@shopify/polaris";
+import { Select, AppProvider, Button,Text } from "@shopify/polaris";
 import { useEffect, useState } from "react";
 // import Selectexample from "./Selectexample";
 import Amazone from "./Amazone";
@@ -28,12 +28,30 @@ function Home() {
   const [selectdata7, setSelectdata7] = useState([]);
   const [selectdata8, setSelectdata8] = useState([]);
   const [selectdata9, setSelectdata9] = useState([]);
-  const token = `eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ1c2VyX2lkIjoiNjMzMjlkN2YwNDUxYzA3NGFhMGUxNWE4Iiwicm9sZSI6ImN1c3RvbWVyIiwiZXhwIjoxNjY1Njc3MTM0LCJpc3MiOiJodHRwczpcL1wvYXBwcy5jZWRjb21tZXJjZS5jb20iLCJ0b2tlbl9pZCI6IjYzNDdmZjBlNWY3MWUxMmE3NjE2M2E3MiJ9.RzQ3x98rGo-1q1dMkJIK2XJlz8LIEtDfazugK8q1e7O-cWQJWD5l0CTKGFIIGI58lGqEVI2a88szbHTKuilYglAqF_Z5QU0BWP8sHpj_Qn3oKVTHozpfH9ogSTfd8o2gmbyFb9Hz8ox-fCeltDsFmCKn48FfZy_Qlxq8OYgxm4FglpIbphDqDc8rfEktNuRBdscSfTQM0ke3o2YElrbyE4fHolFyBUxhd-ioEurSkG7d2NN9JfOEOwjxtcB1OJmUJx8uqW8kRUnNzMh1JpzBOWSjs9fRZLnuSZZMgkvH_BNaoXz3OvKkg_tnum9FC4Qkg5weZYCCpmqA0ArpP1qSWw`;
+  const token = `eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ1c2VyX2lkIjoiNjMzMjlkN2YwNDUxYzA3NGFhMGUxNWE4Iiwicm9sZSI6ImN1c3RvbWVyIiwiZXhwIjoxNjY1NzM3ODk5LCJpc3MiOiJodHRwczpcL1wvYXBwcy5jZWRjb21tZXJjZS5jb20iLCJ0b2tlbl9pZCI6IjYzNDhlYzZiMmFkNmEzMjhiNjQzZjViNSJ9.dbnMaYopm5t9TItE5Sw-OtPSZpQp7g4HYXj2SzfG9yeQLgJMpCz3zYnC5D0drvUZcNnHSmF2K4QM24NfKJf9gRtUoFpVFsNMIWixMHaYmiVek21ryz6-CNgRJzrtmb3EmlpJAKIsK9H-zYOgIsMfG9nBwjguYaRLAqmmkOPFh7CRg7YInxcYUdfM4hh1sSSpLcr4s1-BMzACAqL1zGyB-Bo39tTQFJ4d4WuQcoXHkX-W1EL-srH09-EU3WAEFdG4-xR0ZSnAiXqIfrniwM0q770GjuUkFDrV5320STPXRZJmQ4rzOrxxDZbJRcHNP4Jrmx2sut8n20Aqw-9qo6YZqA`;
   // let options = user?.map((item) => {
   //   return { value: item.marketplace, label: item.name };
   // });
   // console.log("selectdata",selectdata);
   // console.log("subtask", subtask);
+  const [components, setComponents] = useState([]);
+  const handleComponent = (data) => {
+    setComponents(data);
+  };
+  const handleClick = () => {
+    const id = Math.floor(Math.random() * 9999999999999);
+    setComponents([
+      ...components,
+      {
+        id,
+        users: "",
+        select: "",
+        select1: "",
+        select2: "",
+        select3: "",
+      },
+    ]);
+  };
   useEffect(() => {
     const fetchData = async () => {
       let payload = {
@@ -269,9 +287,28 @@ function Home() {
           />
         )}
         {subtask && !subtask.hasChildren && (
-          <>
-            <Amazone />
-          </>
+          <div>
+            <div className="title">
+              <Text>Optional Attributes</Text>
+              <Button onClick={handleClick}>Add Attribute</Button>
+            </div>
+            {components.length <= 0 && (
+              <div className="sms">
+                Please click add attribute to show dropdowns without click can't
+                show anything
+              </div>
+            )}
+            {components.map((item) => {
+              return (
+                <Amazone
+                  key={item.id}
+                  id={item.id}
+                  components={components}
+                  handleComponent={handleComponent}
+                />
+              );
+            })}
+          </div>
         )}
       </AppProvider>
     </>

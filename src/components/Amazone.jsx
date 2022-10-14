@@ -1,20 +1,12 @@
-import {
-  Stack,
-  FormLayout,
-  TextField,
-  Select,
-  Card,
-  Button,
-} from "@shopify/polaris";
+import { Stack, FormLayout, Select, Card, Button } from "@shopify/polaris";
 import { useState, useEffect } from "react";
 
-function Amazone() {
+function Amazone({ id, components, handleComponent }) {
   const [users, setUsers] = useState([]);
   const [select, setSelect] = useState("");
   const [select1, setSelect1] = useState("");
   const [select2, setSelect2] = useState("");
-  const [isshow, setIsshow] = useState(false);
-  const token = `eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ1c2VyX2lkIjoiNjMzMjlkN2YwNDUxYzA3NGFhMGUxNWE4Iiwicm9sZSI6ImN1c3RvbWVyIiwiZXhwIjoxNjY1Njc3MTM0LCJpc3MiOiJodHRwczpcL1wvYXBwcy5jZWRjb21tZXJjZS5jb20iLCJ0b2tlbl9pZCI6IjYzNDdmZjBlNWY3MWUxMmE3NjE2M2E3MiJ9.RzQ3x98rGo-1q1dMkJIK2XJlz8LIEtDfazugK8q1e7O-cWQJWD5l0CTKGFIIGI58lGqEVI2a88szbHTKuilYglAqF_Z5QU0BWP8sHpj_Qn3oKVTHozpfH9ogSTfd8o2gmbyFb9Hz8ox-fCeltDsFmCKn48FfZy_Qlxq8OYgxm4FglpIbphDqDc8rfEktNuRBdscSfTQM0ke3o2YElrbyE4fHolFyBUxhd-ioEurSkG7d2NN9JfOEOwjxtcB1OJmUJx8uqW8kRUnNzMh1JpzBOWSjs9fRZLnuSZZMgkvH_BNaoXz3OvKkg_tnum9FC4Qkg5weZYCCpmqA0ArpP1qSWw`;
+  const token = `eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ1c2VyX2lkIjoiNjMzMjlkN2YwNDUxYzA3NGFhMGUxNWE4Iiwicm9sZSI6ImN1c3RvbWVyIiwiZXhwIjoxNjY1NzM3ODk5LCJpc3MiOiJodHRwczpcL1wvYXBwcy5jZWRjb21tZXJjZS5jb20iLCJ0b2tlbl9pZCI6IjYzNDhlYzZiMmFkNmEzMjhiNjQzZjViNSJ9.dbnMaYopm5t9TItE5Sw-OtPSZpQp7g4HYXj2SzfG9yeQLgJMpCz3zYnC5D0drvUZcNnHSmF2K4QM24NfKJf9gRtUoFpVFsNMIWixMHaYmiVek21ryz6-CNgRJzrtmb3EmlpJAKIsK9H-zYOgIsMfG9nBwjguYaRLAqmmkOPFh7CRg7YInxcYUdfM4hh1sSSpLcr4s1-BMzACAqL1zGyB-Bo39tTQFJ4d4WuQcoXHkX-W1EL-srH09-EU3WAEFdG4-xR0ZSnAiXqIfrniwM0q770GjuUkFDrV5320STPXRZJmQ4rzOrxxDZbJRcHNP4Jrmx2sut8n20Aqw-9qo6YZqA`;
   // const options = user?.map((item) => {
   //   return { value: item.marketplace, label: item.name };
   // });
@@ -64,36 +56,31 @@ function Amazone() {
   }, []);
   console.log("Amazone user", users);
 
-  function handlebutton() {
-    setIsshow(true);
+  function handleDeleteButton() {
+    let newComponentList = components.filter((comp) => comp.id !== id);
+    handleComponent(newComponentList);
   }
-  // const options = user?.map((item) => {
-  //   return { value: item.marketplace, label: item.name };
-  // });
+  console.log(components, "compo");
   return (
     <Card sectioned>
-      <Button textAlign="left" onClick={handlebutton}>
-        Amazon Attribute
-      </Button>
+      <Button  onClick={handleDeleteButton}>Delete</Button>
       <Stack vertical spacing="extraTight">
         <FormLayout>
           <FormLayout.Group condensed>
-            {isshow && (
-              <Select
-                label="Amazon Attribute"
-                placeholder="Select"
-                options={Object.keys(users)?.map((item) => {
-                  return { value: item, label: item };
-                })}
-                // disabled={disablevalue(select) ? true : false}
-                value={select}
-                onChange={(e) => {
-                  setSelect(e);
-                  setSelect1("");
-                  setSelect2("");
-                }}
-              />
-            )}
+                <Select
+                  label="Amazon Attribute"
+                  placeholder="Select"
+                  options={Object.keys(users)?.map((item) => {
+                    return { value: item, label: item };
+                  })}
+                  // disabled={disablevalue(select) ? true : false}
+                  value={select}
+                  onChange={(e) => {
+                    setSelect(e);
+                    setSelect1("");
+                    setSelect2("");
+                  }}
+                />
             {select != "" && (
               <Select
                 label="Shopify Attribute"
