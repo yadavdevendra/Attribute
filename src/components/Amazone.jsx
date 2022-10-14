@@ -46,7 +46,7 @@ useEffect(() => {
               label="Amazon Attribute"
               placeholder="Select"
               options={Object.keys(users)?.map((item) => {
-                return { value: item, label: item ,disabled:disablevalue(select)};
+                return { value: item, label: item,disabled:select };
               })}
               value={select}
               onChange={(e) => {
@@ -54,6 +54,7 @@ useEffect(() => {
                 setSelect1("");
                 setSelect2("");
               }}
+              disable={disablevalue(select) ? true : false}
             />
             {select != "" && (
               <Select
