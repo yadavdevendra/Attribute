@@ -29,6 +29,7 @@ function Home() {
   const [selectdata7, setSelectdata7] = useState([]);
   const [selectdata8, setSelectdata8] = useState([]);
   const [selectdata9, setSelectdata9] = useState([]);
+   const [disableArray, setDisableArray] = useState({});
   const token = `eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ1c2VyX2lkIjoiNjMzMjlkN2YwNDUxYzA3NGFhMGUxNWE4Iiwicm9sZSI6ImN1c3RvbWVyIiwiZXhwIjoxNjY1NzU0MDA1LCJpc3MiOiJodHRwczpcL1wvYXBwcy5jZWRjb21tZXJjZS5jb20iLCJ0b2tlbl9pZCI6IjYzNDkyYjU1ODM3MzEwMDViYzRiYTU1MyJ9.b5ed7ceQxbEqQ27wd0kyA4oreJYjHhowtVRLTfq1lPOCU2vBr_kJaSYDind8prM2JZ-nzzCLLMQdNB3L3ig1_nhyeKi2adyiZEHQhpbvc0hv7SZwS-2-DP2csInuoxAvXb0B-SsJOERI31eeXLGXx6yCip7huWEDay_aQXzRLDb23PeHPG9ZLn0zPd1_6X9doL-f6UkT9I5ce40IQfTiQ2eJ1vJJTy1i3hgfDbUb9KvgYJmvLz8xDFg39GSIC9r1f90XV-HzoPXzVnnAMa2uT9QP6ucPxusbIUR1DJudkKA3mDUCKB4u5bA-Z39lRx_bgvaGLs1qJLEYLDS4MOjdFw`;
   // let options = user?.map((item) => {
   //   return { value: item.marketplace, label: item.name };
@@ -138,8 +139,15 @@ function Home() {
           }
         );
         const data = await response.json();
-        // console.log("Amazone", data);
+        // console.log("Amazone", data.data);
         setUsers(data.data);
+        setDisableArray(() => {
+           let x = {};
+           Object.keys(data.data).forEach((item) => {
+             x[item] = false;
+           });
+           return x;
+        })
       };
       fetchData();
     }, []);
@@ -347,12 +355,12 @@ function Home() {
               return (
                 <Amazone
                   users={users}
-                
+                  disableArray={disableArray}
                   key={item.id}
                   id={item.id}
                   components={components}
                   handleComponent={handleComponent}
-                
+                  setDisableArray={setDisableArray}
                 />
               );
             })}
