@@ -6,6 +6,7 @@ import Amazone from "./Amazone";
 
 function Home() {
   const [user, setuser] = useState([]);
+   const [users, setUsers] = useState([]);
   // value set
   const [attribute, setAttribute] = useState("");
   const [attribute1, setAttribute1] = useState("");
@@ -98,6 +99,49 @@ function Home() {
     fetchData();
   }, [parentid]);
 
+    useEffect(() => {
+      const fetchData = async () => {
+        let payload = {
+          data: {
+            barcode_exemption: false,
+            browser_node_id: "1380072031",
+            category: "major_appliances",
+            sub_category: "microwaveoven",
+          },
+          source: {
+            marketplace: "shopify",
+            shopId: "500",
+          },
+          target: {
+            marketplace: "amazon",
+            shopId: "530",
+          },
+          target_marketplace:
+            "eyJtYXJrZXRwbGFjZSI6ImFsbCIsInNob3BfaWQiOm51bGx9",
+        };
+        const response = await fetch(
+          `https://multi-account.sellernext.com/home/public/connector/profile/getCategoryAttributes/`,
+          {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+              appTag: "amazon_sales_channel",
+              Authorization: `Bearer ${token}`,
+              "Ced-Source-Id": 500,
+              "Ced-Source-Name": "shopify",
+              "Ced-Target-Id": 530,
+              "Ced-Target-Name": "amazon",
+            },
+            body: JSON.stringify(payload),
+          }
+        );
+        const data = await response.json();
+        console.log("Amazone", data);
+        setUsers(data.data);
+      };
+      fetchData();
+    }, []);
   return (
     <>
       <AppProvider>
@@ -301,6 +345,7 @@ function Home() {
             {components.map((item) => {
               return (
                 <Amazone
+                users={users}
                   key={item.id}
                   id={item.id}
                   components={components}
