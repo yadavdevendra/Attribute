@@ -51,9 +51,10 @@ function Amazone({ id, components, handleComponent, users, disableArray, setDisa
               })}
               onChange={(e) => {
                 setSelect(e);
+                disablevalue(e);
                 setSelect1("");
                 setSelect2("");
-                disablevalue(e);
+                
               }}
             />
             {select != "" && (
