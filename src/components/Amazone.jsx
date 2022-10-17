@@ -1,8 +1,7 @@
 import { Stack, FormLayout, Select, Card, Button } from "@shopify/polaris";
-import { useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 
-function Amazone({ id, components, handleComponent, users, disableArray, setDisableArray }) {
-  // const [users, setUsers] = useState([]);
+function Amazone({ id, components, handleComponent, users }) {
   const [select, setSelect] = useState("");
   const [select1, setSelect1] = useState("");
   const [select2, setSelect2] = useState("");
@@ -11,7 +10,7 @@ function Amazone({ id, components, handleComponent, users, disableArray, setDisa
   // console.log("select", select);
   // console.log(components,"compo");
   // console.log("selectusers", users[select]);
-  // console.log("Amazone user", users);
+  console.log("Amazone user", users);
   useEffect(() => {
     let newcomponent = components.map((item) => {
       if (item.id === id) return { ...item, select, select1, select2 };
@@ -25,13 +24,18 @@ function Amazone({ id, components, handleComponent, users, disableArray, setDisa
     handleComponent(newComponentList);
   }
   const disablevalue = (option) => {
-    const newDisableArray = {
-      ...disableArray,
-      [option]: !disableArray[option],
-    };
-    setDisableArray(newDisableArray);
+    // console.log(option,"o9845941")
+    let opt = { value: option, label: option, disabled: false };
+    components.forEach((item) => {
+      if (item.select == option) {
+        console.log("INSIDE DISABLE VALUE",item.select);
+        opt.disabled = true;
+        return; 
+      }
+    });
+    return opt
   };
-  // console.log(components, "compo");
+  // console.log(disablevalue("Basic"), "compo");
   return (
     <Card sectioned>
       <Button onClick={handleDeleteButton}>Delete</Button>
@@ -42,19 +46,14 @@ function Amazone({ id, components, handleComponent, users, disableArray, setDisa
               label="Amazon Attribute"
               placeholder="Select"
               value={select}
-              options={Object.keys(users)?.map((item, i) => {
-                return {
-                  value: item,
-                  label: item,
-                  disabled: disableArray[item],
-                };
+              options={Object.keys(users).map((item, i) => {
+                
+                return disablevalue(item);
               })}
               onChange={(e) => {
                 setSelect(e);
-                disablevalue(e);
                 setSelect1("");
                 setSelect2("");
-                
               }}
             />
             {select != "" && (

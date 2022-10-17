@@ -1,12 +1,12 @@
 import React from "react";
-import { Select, AppProvider, Button,Text } from "@shopify/polaris";
+import { Select, AppProvider, Button, Text } from "@shopify/polaris";
 import { useEffect, useState } from "react";
 // import Selectexample from "./Selectexample";
 import Amazone from "./Amazone";
 
 function Home() {
   const [user, setuser] = useState([]);
-   const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState([]);
   // value set
   const [attribute, setAttribute] = useState("");
   const [attribute1, setAttribute1] = useState("");
@@ -29,8 +29,8 @@ function Home() {
   const [selectdata7, setSelectdata7] = useState([]);
   const [selectdata8, setSelectdata8] = useState([]);
   const [selectdata9, setSelectdata9] = useState([]);
-   const [disableArray, setDisableArray] = useState({});
-  const token = `eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ1c2VyX2lkIjoiNjMzMjlkN2YwNDUxYzA3NGFhMGUxNWE4Iiwicm9sZSI6ImN1c3RvbWVyIiwiZXhwIjoxNjY1NzU0MDA1LCJpc3MiOiJodHRwczpcL1wvYXBwcy5jZWRjb21tZXJjZS5jb20iLCJ0b2tlbl9pZCI6IjYzNDkyYjU1ODM3MzEwMDViYzRiYTU1MyJ9.b5ed7ceQxbEqQ27wd0kyA4oreJYjHhowtVRLTfq1lPOCU2vBr_kJaSYDind8prM2JZ-nzzCLLMQdNB3L3ig1_nhyeKi2adyiZEHQhpbvc0hv7SZwS-2-DP2csInuoxAvXb0B-SsJOERI31eeXLGXx6yCip7huWEDay_aQXzRLDb23PeHPG9ZLn0zPd1_6X9doL-f6UkT9I5ce40IQfTiQ2eJ1vJJTy1i3hgfDbUb9KvgYJmvLz8xDFg39GSIC9r1f90XV-HzoPXzVnnAMa2uT9QP6ucPxusbIUR1DJudkKA3mDUCKB4u5bA-Z39lRx_bgvaGLs1qJLEYLDS4MOjdFw`;
+  const [disableArray, setDisableArray] = useState({});
+  const token = `eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ1c2VyX2lkIjoiNjMzMjlkN2YwNDUxYzA3NGFhMGUxNWE4Iiwicm9sZSI6ImN1c3RvbWVyIiwiZXhwIjoxNjY2MDAwOTYxLCJpc3MiOiJodHRwczpcL1wvYXBwcy5jZWRjb21tZXJjZS5jb20iLCJ0b2tlbl9pZCI6IjYzNGNmMDAxZTFkOGU2NDQ0ZjY0NzQ0MiJ9.D2xqE0L81RNxAfH11hcf9ilTPrJidKKalxngv1yTADrLELUQuXjYHC9C4ySSIb72BPaHeHxuA0msocXxYbR9Ye6LbW_sIG50f51dn2z2cxbatvVnenJCzRxUlNSEveluAW1wDTtNb9CHa7QrQDeIcsGoA4PcJV_ocomgxozFBal0RRorZW-ffvrKEqDZVmKqIx77ymlMlCUeFsWcEI0lTvEwbCOB_Jl-2jNcfjHziSjOZ1fT9GzyOynD4CixwGR7HXrBb6Z1e8muwrjkaE0kP0wVwCwZ9C2_hGdCxU_ZxFFavf-_vbqgUfCLPBfYBdQc1S9Rs1zLbv2PPiLgxhzmPg`;
   // let options = user?.map((item) => {
   //   return { value: item.marketplace, label: item.name };
   // });
@@ -41,7 +41,7 @@ function Home() {
   const handleComponent = (data) => {
     setComponents(data);
   };
-   
+
   const handleClick = () => {
     const id = Math.floor(Math.random() * 9999999999999);
     setComponents([
@@ -101,56 +101,55 @@ function Home() {
     fetchData();
   }, [parentid]);
 
-    useEffect(() => {
-      const fetchData = async () => {
-        let payload = {
-          data: {
-            barcode_exemption: false,
-            browser_node_id: "1380072031",
-            category: "major_appliances",
-            sub_category: "microwaveoven",
-          },
-          source: {
-            marketplace: "shopify",
-            shopId: "500",
-          },
-          target: {
-            marketplace: "amazon",
-            shopId: "530",
-          },
-          target_marketplace:
-            "eyJtYXJrZXRwbGFjZSI6ImFsbCIsInNob3BfaWQiOm51bGx9",
-        };
-        const response = await fetch(
-          `https://multi-account.sellernext.com/home/public/connector/profile/getCategoryAttributes/`,
-          {
-            method: "POST",
-            headers: {
-              Accept: "application/json",
-              "Content-Type": "application/json",
-              appTag: "amazon_sales_channel",
-              Authorization: `Bearer ${token}`,
-              "Ced-Source-Id": 500,
-              "Ced-Source-Name": "shopify",
-              "Ced-Target-Id": 530,
-              "Ced-Target-Name": "amazon",
-            },
-            body: JSON.stringify(payload),
-          }
-        );
-        const data = await response.json();
-        // console.log("Amazone", data.data);
-        setUsers(data.data);
-        setDisableArray(() => {
-           let x = {};
-           Object.keys(data.data).forEach((item) => {
-             x[item] = false;
-           });
-           return x;
-        })
+  useEffect(() => {
+    const fetchData = async () => {
+      let payload = {
+        data: {
+          barcode_exemption: false,
+          browser_node_id: "1380072031",
+          category: "major_appliances",
+          sub_category: "microwaveoven",
+        },
+        source: {
+          marketplace: "shopify",
+          shopId: "500",
+        },
+        target: {
+          marketplace: "amazon",
+          shopId: "530",
+        },
+        target_marketplace: "eyJtYXJrZXRwbGFjZSI6ImFsbCIsInNob3BfaWQiOm51bGx9",
       };
-      fetchData();
-    }, []);
+      const response = await fetch(
+        `https://multi-account.sellernext.com/home/public/connector/profile/getCategoryAttributes/`,
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            appTag: "amazon_sales_channel",
+            Authorization: `Bearer ${token}`,
+            "Ced-Source-Id": 500,
+            "Ced-Source-Name": "shopify",
+            "Ced-Target-Id": 530,
+            "Ced-Target-Name": "amazon",
+          },
+          body: JSON.stringify(payload),
+        }
+      );
+      const data = await response.json();
+      // console.log("Amazone", data.data);
+      setUsers(data.data);
+      // setDisableArray(() => {
+      //    let x = {};
+      //    Object.keys(data.data).forEach((item) => {
+      //      x[item] = false;
+      //    });
+      //    return x;
+      // })
+    };
+    fetchData();
+  }, []);
   return (
     <>
       <AppProvider>
@@ -355,12 +354,10 @@ function Home() {
               return (
                 <Amazone
                   users={users}
-                  disableArray={disableArray}
                   key={item.id}
                   id={item.id}
                   components={components}
                   handleComponent={handleComponent}
-                  setDisableArray={setDisableArray}
                 />
               );
             })}
